@@ -11,17 +11,20 @@ public class db_new : MonoBehaviour
 {
 	private string conn;
 	private List<HighScore> Highscores = new List<HighScore> ();
-	public GameObject scorePrefab;
-	public Transform scoreParent;
+
 
 	// Use this for initialization
 	void Start ()
 	{
 		Debug.Log ("DB script starts");
-		//string conn = "URI=file:" + Application.dataPath + "Plugins/Users.db"; //Path to database.
+		//string conn = "URI=file:" + Application.dataPath + "Plugins/Users.db"; 
+
+		//Path to database.
 		string conn = "URI=file:Users.db"; 
 		//GetScores ();
 		ShowScores ();
+
+		// Calling mehthod to show the scores
 	}
 
 	void Update ()
@@ -76,12 +79,12 @@ public class db_new : MonoBehaviour
 			int Score = reader.GetInt32 (2);
 
 			Highscores.Add (new HighScore (Id, Username, Score));
-
-
 			Debug.Log ("Id= " + Id + "  name =" + Username + " Score= " + Score);
+
+			//prints on console
 		}
 
-		//shows data on console
+
 		reader.Close ();
 		reader = null;
 		dbcmd.Dispose ();
@@ -109,21 +112,24 @@ public class db_new : MonoBehaviour
 		dbcmd.ExecuteScalar ();
 		dbconn.Close ();
 
-		//deletes ID 
+		//deletes ID if called
 	}
 
 	private void ShowScores ()
 	{
-		Debug.Log ("Printing Highscores");
 		GetScores ();
+
+		//Calls getscores method Which has connection to database
 
 		String Score = "Score";
 		String Name = "Name";
 		String Rank = "Rank";
 
-		for (int i = 0; i < 10 && i < Highscores.Count; i++) {
+		//declaring 
+
+		for (int i = 0; i < 10 && i < Highscores.Count; i++) {  
 			Debug.Log (i + "\n");	
-			Name += "\n" + Highscores [i].Username;
+			Name += "\n" + Highscores [i].Username; //from table
 			Score += "\n" + Highscores [i].Score;
 			Rank += "\n" + ((int)(i+1)).ToString ();
 		}
@@ -131,28 +137,7 @@ public class db_new : MonoBehaviour
 		GameObject.Find ("NameText").GetComponent<Text> ().text = Name;
 		GameObject.Find ("RankText").GetComponent<Text> ().text = Rank;
 
-		/*
-		for (int i = 0; i <Highscores.Count; i++) {
-			GameObject tmpObjec = Instantiate(scorePrefab);
-			tmpObjec.transform.SetParent(scoreParent, false); 
-			HighScore tmpScore = Highscores [i];
-			tmpObjec.GetComponent<HighScorePrefab> ().SetScore (
-				tmpObjec.name, tmpScore.Score.ToString(), "#" + (i + 1).ToString ()); 
-*/
-
-		//name.GetComponent<Text> ().text += "\n#" + (i + 1);
-		//score.GetComponent<Text> ().text += "\n" + tmpScore.Username;
-		//rank.GetComponent<Text> ().text += "\n" + tmpScore.Score;
-
-		//tmpScore.GetComponent<RankText> ().text += "\n#" + (i + 1);
-		//tmpScore.GetComponent<NameText> ().text += "\n" + tmpScore.Username;
-		//tmpScore.GetComponent<ScoreText> ().text += "\n" + tmpScore.Score;
-		//coreParent = GameObject.Find ("Scores").transform;
-
-
-		//tmpObjec.GetComponent<RectTransform> ().localScale = new Vector3 (1, 1, 1); 
-		//showing rank to the player
-		//tmpObjec.transform.SetParent(scoreParent); 
+		//replaces the text fields in "score" with values from the database connected 
 
 	}
 }
