@@ -17,10 +17,8 @@ public class db_new : MonoBehaviour
 	void Start ()
 	{
 		Debug.Log ("DB script starts");
+		//this print is just to test if its working 
 		//string conn = "URI=file:" + Application.dataPath + "Plugins/Users.db"; 
-
-		//Path to database.
-		string conn = "URI=file:Users.db"; 
 		//GetScores ();
 		ShowScores ();
 
@@ -48,7 +46,7 @@ public class db_new : MonoBehaviour
 		dbconn.Close ();
 
 		//shows data on console
-
+		//this is a method with which we can insert data
 	}
 
 

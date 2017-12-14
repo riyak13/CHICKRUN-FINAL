@@ -14,6 +14,7 @@ public class Storyslides : MonoBehaviour
 	GameObject forward;
 	GameObject home;
 
+	//adressing the objects
 
 	void Start () {
 		story[0] = GameObject.Find ("Story1");
@@ -26,6 +27,8 @@ public class Storyslides : MonoBehaviour
 		back.GetComponent<Button>().onClick.AddListener (() => goBack());
 		forward.GetComponent<Button>().onClick.AddListener (() => goForward ());
 		home.GetComponent<Button>().onClick.AddListener (() => goHome ());
+
+		//finind the objects and adressing the slides by arrays
 	}
 
 	void FixedUpdate () {
@@ -69,6 +72,8 @@ public class Storyslides : MonoBehaviour
 		//  go back the main menu.
 		SceneManager.LoadScene("MainMenu");
 	}
+
+
 
 }
 
